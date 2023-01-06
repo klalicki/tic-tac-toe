@@ -11,9 +11,22 @@ const gameRules = {
   ],
   players: ["X", "O"],
 };
-let curPlayer = 0;
 
+//set up gameboard
+let curPlayer;
 let gameBoard = new Array(9);
+
+const updateUI = () => {
+  document.querySelector("#cur-player").textContent =
+    gameRules.players[curPlayer];
+};
+
+const restartGame = () => {
+  curPlayer = 0;
+  gameBoard.fill("");
+  updateUI();
+};
+restartGame();
 
 /**
  * Checks the game board for winning conditions,
@@ -29,11 +42,10 @@ const checkForWin = () => {
     const lineToCheck = item.map((sqIndex) => {
       return gameBoard[sqIndex];
     });
-    //check if 1) all items on this line are equal AND 2) all items on this line
-    const lineResult = lineToCheck.every((value, index, array) => {
-      return value === array[0] && typeof value !== "undefined";
+    //check if 1) all squares on this line are equal AND 2) all squares in this line have a value
+    const lineResult = lineToCheck.every((value, _index, array) => {
+      return value === array[0] && value !== "";
     });
-    console.log(lineResult);
     if (lineResult) {
       hasWon = lineToCheck[0];
     }
@@ -48,6 +60,20 @@ const checkForWin = () => {
 const handleSqClick = (event) => {
   //event handler for squares - start by getting the index of the square clicked
   const sqIndex = event.target.getAttribute("data-sq-index");
+  //check if the square is empty - if so, add a mark to it
+  if (isEmpty(sqIndex)) {
+    gameBoard[sqIndex] = gameRules.players[curPlayer];
+    document.querySelector(`[data-sq-index='${sqIndex}']`).textContent =
+      gameRules.players[curPlayer];
+    const isWin = checkForWin();
+    if (isWin) {
+      console.log(`game over! player ${isWin} won`);
+    } else {
+      //switch players
+      curPlayer = 1 - curPlayer;
+      updateUI();
+    }
+  }
 };
 
 /**
@@ -56,7 +82,7 @@ const handleSqClick = (event) => {
  * @returns The function isEmpty is returning a boolean value.
  */
 const isEmpty = (index) => {
-  return typeof gameBoard[index] === "undefined";
+  return gameBoard[index] === "";
 };
 
 //add event listener to squares

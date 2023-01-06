@@ -19,3 +19,11 @@ for each item in list of winning combos:
   if all 3 are the same, return which one it is
   if not, return " "
 
+
+
+Computer Player:
+get list of still-winnable rows (ie opponent does not have any marks in them)
+get list of playable squares (no marks)
+for each playable square
+  for each winnable row
+    score the row

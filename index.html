@@ -9,7 +9,7 @@
   </head>
   <body>
     <div class="app-container">
-      <div class="ttt-grid">
+      <section class="ttt-grid">
         <div class="ttt-square" data-sq-index="0"></div>
         <div class="ttt-square" data-sq-index="1"></div>
         <div class="ttt-square" data-sq-index="2"></div>
@@ -19,7 +19,12 @@
         <div class="ttt-square" data-sq-index="6"></div>
         <div class="ttt-square" data-sq-index="7"></div>
         <div class="ttt-square" data-sq-index="8"></div>
-      </div>
+      </section>
+      <section class="ttt-panel">
+        <h1>tic-tac-toe</h1>
+        <h2>current player: <span id="cur-player"></span></h2>
+        <button id="btn-restart" type="reset">Restart Game</button>
+      </section>
     </div>
   </body>
   <script defer src="app.js"></script>
