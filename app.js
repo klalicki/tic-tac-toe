@@ -15,6 +15,7 @@ const gameRules = {
 //set up gameboard
 let curPlayer;
 let gameBoard = new Array(9);
+let isGameRunning = true;
 
 const updateUI = () => {
   document.querySelector("#cur-player").textContent =
@@ -22,11 +23,18 @@ const updateUI = () => {
 };
 
 const restartGame = () => {
+  isGameRunning = true;
   curPlayer = 0;
   gameBoard.fill("");
   updateUI();
 };
 restartGame();
+
+const checkForDraw = () => {
+  return gameBoard.every((sq) => {
+    return sq !== "";
+  });
+};
 
 /**
  * Checks the game board for winning conditions,
@@ -58,20 +66,27 @@ const checkForWin = () => {
  * @param event - the event object that was triggered
  */
 const handleSqClick = (event) => {
-  //event handler for squares - start by getting the index of the square clicked
-  const sqIndex = event.target.getAttribute("data-sq-index");
-  //check if the square is empty - if so, add a mark to it
-  if (isEmpty(sqIndex)) {
-    gameBoard[sqIndex] = gameRules.players[curPlayer];
-    document.querySelector(`[data-sq-index='${sqIndex}']`).textContent =
-      gameRules.players[curPlayer];
-    const isWin = checkForWin();
-    if (isWin) {
-      console.log(`game over! player ${isWin} won`);
-    } else {
-      //switch players
-      curPlayer = 1 - curPlayer;
-      updateUI();
+  if (isGameRunning) {
+    //event handler for squares - start by getting the index of the square clicked
+    const sqIndex = event.target.getAttribute("data-sq-index");
+    //check if the square is empty - if so, add a mark to it
+    if (isEmpty(sqIndex)) {
+      gameBoard[sqIndex] = gameRules.players[curPlayer];
+      document.querySelector(`[data-sq-index='${sqIndex}']`).textContent =
+        gameRules.players[curPlayer];
+      const isWin = checkForWin();
+      const isDraw = checkForDraw();
+      if (isWin) {
+        console.log(`game over! player ${isWin} won`);
+        isGameRunning = false;
+      } else if (isDraw) {
+        console.log("draw!");
+        isGameRunning = false;
+      } else {
+        //switch players
+        curPlayer = 1 - curPlayer;
+        updateUI();
+      }
     }
   }
 };
