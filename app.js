@@ -17,6 +17,11 @@ let curPlayer;
 let gameBoard = new Array(9);
 let isGameRunning = true;
 
+const clearGameBoard = () => {
+  document.querySelectorAll(".ttt-square").forEach((item) => {
+    item.textContent = "";
+  });
+};
 const updateUI = () => {
   document.querySelector("#cur-player").textContent =
     gameRules.players[curPlayer];
@@ -27,6 +32,7 @@ const restartGame = () => {
   curPlayer = 0;
   gameBoard.fill("");
   updateUI();
+  clearGameBoard();
 };
 restartGame();
 
@@ -104,3 +110,6 @@ const isEmpty = (index) => {
 document.querySelectorAll(".ttt-square").forEach((el) => {
   el.addEventListener("click", handleSqClick);
 });
+
+//add event listener for Reset button
+document.getElementById("btn-restart").addEventListener("click", restartGame);
