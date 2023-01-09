@@ -9,10 +9,13 @@
   </head>
   <body>
     <div class="page-container">
-      <header>
-        <h1>Tic-Tac-Toe</h1>
-      </header>
       <div class="app-container">
+        <header>
+          <h1>Tic-Tac-Toe</h1>
+          <h2>current player: <span id="cur-player"></span></h2>
+          <button id="btn-restart">Restart Game</button>
+        </header>
+
         <section class="ttt-grid">
           <button class="ttt-square" data-sq-index="0"></button>
           <button class="ttt-square" data-sq-index="1"></button>
@@ -24,11 +27,7 @@
           <button class="ttt-square" data-sq-index="7"></button>
           <button class="ttt-square" data-sq-index="8"></button>
         </section>
-        <section class="ttt-panel">
-          <h1>tic-tac-toe</h1>
-          <h2>current player: <span id="cur-player"></span></h2>
-          <button id="btn-restart">Restart Game</button>
-        </section>
+
         <!-- <div class="modal-box">
           <h1>Game Over</h1>
           <h3>X wins!</h3>

@@ -27,6 +27,12 @@ const clearGameBoard = () => {
 const updateUI = () => {
   document.querySelector("#cur-player").textContent =
     gameRules.players[curPlayer];
+  document
+    .querySelector(".ttt-grid")
+    .classList.remove("use-color-x", "use-color-o");
+  document
+    .querySelector(".app-container")
+    .classList.add(`use-color-${gameRules.players[curPlayer].toLowerCase()}`);
 };
 
 const restartGame = () => {
