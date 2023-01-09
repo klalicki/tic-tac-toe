@@ -137,8 +137,14 @@ header {
   padding: 0.5rem;
   border-radius: 0.25rem;
   background-color: white;
-  border: 1px solid black;
+  border: 2px solid black;
+  transition: transform 0.3s;
 }
+#btn-restart:hover {
+  transform: scale(1.03);
+  transition: transform 0.3s;
+}
+
 .use-color-x {
   --color-current-main: var(--color-x-main);
   --color-current-secondary: var(--color-x-secondary);
