@@ -19,15 +19,27 @@ let curPlayer;
 let gameBoard = new Array(9);
 let isGameRunning = true;
 
-const clearUI = () => {
+/**
+ * resets the game's UI:
+ * re-enables all squares and hover effects
+ * clears the end-game message
+ */
+const resetUI = () => {
   document.querySelectorAll(".ttt-square").forEach((item) => {
     item.textContent = "";
     item.classList.remove("square-x", "square-o", "winning-line");
     item.disabled = false;
   });
+  document.querySelector(".ttt-grid").classList.add("hover-active");
   document.querySelector("#message").textContent = "";
   updateUI();
 };
+
+/**
+ * updates the game's UI (to be run after each turn):
+ * current player indicator
+ * current hover effects
+ */
 const updateUI = () => {
   document.querySelector("#cur-player").textContent =
     gameRules.players[curPlayer];
@@ -43,8 +55,7 @@ const restartGame = () => {
   isGameRunning = true;
   curPlayer = 0;
   gameBoard.fill("");
-  clearUI();
-  document.querySelector(".ttt-grid").classList.add("hover-active");
+  resetUI();
 };
 restartGame();
 
@@ -102,6 +113,7 @@ const handleSqClick = (event) => {
       curSquareElem.textContent = gameRules.players[curPlayer];
       curSquareElem.disabled = true;
       curSquareElem.classList.add(curPlayer === 0 ? "square-x" : "square-o");
+      //check to see if a win or draw condition has occurred
       const isWin = checkForWin();
       const isDraw = checkForDraw();
       if (isWin) {
@@ -116,11 +128,17 @@ const handleSqClick = (event) => {
     }
   }
 };
+/**
+ * Ends the game:
+ * displays the message passed as a parameter, and disables hover effects
+ * @param message - The message to display to the user.
+ */
 const endGame = (message) => {
   document.querySelector("#message").textContent = message;
   isGameRunning = false;
   document.querySelector(".ttt-grid").classList.remove("hover-active");
 };
+
 /**
  * Check if a square is empty (legal to click)
  * @param index - the index of the square that we want to check
