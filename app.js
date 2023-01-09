@@ -51,14 +51,25 @@ const updateUI = () => {
     .classList.add(`use-color-${gameRules.players[curPlayer].toLowerCase()}`);
 };
 
+/**
+ * Restarts (or starts) the game:
+ * clears the board
+ * sets X as the current player
+ * resets all UI elements
+ */
 const restartGame = () => {
   isGameRunning = true;
   curPlayer = 0;
   gameBoard.fill("");
   resetUI();
 };
+
 restartGame();
 
+/**
+ * Checks for a draw condition, which is met if every square is full
+ * @returns a boolean value.
+ */
 const checkForDraw = () => {
   return gameBoard.every((sq) => {
     return sq !== "";
