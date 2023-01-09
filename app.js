@@ -20,6 +20,7 @@ let isGameRunning = true;
 const clearGameBoard = () => {
   document.querySelectorAll(".ttt-square").forEach((item) => {
     item.textContent = "";
+    item.classList.remove("square-x", "square-o");
   });
 };
 const updateUI = () => {
@@ -78,8 +79,12 @@ const handleSqClick = (event) => {
     //check if the square is empty - if so, add a mark to it
     if (isEmpty(sqIndex)) {
       gameBoard[sqIndex] = gameRules.players[curPlayer];
-      document.querySelector(`[data-sq-index='${sqIndex}']`).textContent =
-        gameRules.players[curPlayer];
+      const curSquareElem = document.querySelector(
+        `[data-sq-index='${sqIndex}']`
+      );
+      curSquareElem.blur();
+      curSquareElem.textContent = gameRules.players[curPlayer];
+      curSquareElem.classList.add(curPlayer === 0 ? "square-x" : "square-o");
       const isWin = checkForWin();
       const isDraw = checkForDraw();
       if (isWin) {

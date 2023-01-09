@@ -1,14 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
+* {
+  font-family: "DM Sans", sans-serif;
+}
+
+:root {
+  --color-x-main: darkred;
+  --color-o-main: darkblue;
+  --color-x-secondary: lightpink;
+  --color-o-secondary: lightblue;
+  --color-bg: #f3f4f6;
+  --box-shadow-standard: 0px 15px 15px -3px rgba(0, 0, 0, 0.1);
+}
+body {
+  background-color: var(--color-bg);
+}
 .app-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
-  width: 100vw;
+  /* align-items: center; */
+  max-width: 1200px;
+  gap: 3rem;
+}
+.ttt-panel {
+  width: 300px;
 }
 .ttt-grid {
-  /* align-self: stretch; */
-  width: 800px;
-  max-width: 900px;
+  align-self: stretch;
+  /* width: 800px; */
+  width: calc(100% - 300px);
   aspect-ratio: 1;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -17,11 +37,39 @@
   flex-shrink: 1;
 }
 
-.ttt-grid div {
-  border: 1px solid black;
+.ttt-square {
+  box-shadow: var(--box-shadow-standard);
+  background-color: white;
   font-size: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: none;
+  border-radius: 0.5rem;
+  transition: transform 0.3s;
+  box-shadow: 1em black;
 }
-@
+.ttt-square:hover,
+.ttt-square:focus {
+  transform: scale(1.05);
+  transition: transform 0.3s;
+}
+
+* {
+  /* border: 0.5px solid red; */
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.square-x {
+  color: var(--color-x-main);
+  background-color: var(--color-x-secondary);
+}
+.square-o {
+  color: var(--color-o-main);
+  background-color: var(--color-o-secondary);
+}
