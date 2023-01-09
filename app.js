@@ -1,3 +1,5 @@
+//contains the list of coordinates of the winning combinations, plus the characters used for the two players
+
 const gameRules = {
   winningConditions: [
     [0, 1, 2],
@@ -17,18 +19,20 @@ let curPlayer;
 let gameBoard = new Array(9);
 let isGameRunning = true;
 
-const clearGameBoard = () => {
+const clearUI = () => {
   document.querySelectorAll(".ttt-square").forEach((item) => {
     item.textContent = "";
-    item.classList.remove("square-x", "square-o");
+    item.classList.remove("square-x", "square-o", "winning-line");
     item.disabled = false;
   });
+  document.querySelector("#message").textContent = "";
+  updateUI();
 };
 const updateUI = () => {
   document.querySelector("#cur-player").textContent =
     gameRules.players[curPlayer];
   document
-    .querySelector(".ttt-grid")
+    .querySelector(".app-container")
     .classList.remove("use-color-x", "use-color-o");
   document
     .querySelector(".app-container")
@@ -39,8 +43,8 @@ const restartGame = () => {
   isGameRunning = true;
   curPlayer = 0;
   gameBoard.fill("");
-  updateUI();
-  clearGameBoard();
+  clearUI();
+  document.querySelector(".ttt-grid").classList.add("hover-active");
 };
 restartGame();
 
@@ -70,6 +74,11 @@ const checkForWin = () => {
     });
     if (lineResult) {
       hasWon = lineToCheck[0];
+      item.forEach((sqIndex) => {
+        document
+          .querySelector(`[data-sq-index="${sqIndex}"]`)
+          .classList.add("winning-line");
+      });
     }
   });
   return hasWon;
@@ -96,11 +105,9 @@ const handleSqClick = (event) => {
       const isWin = checkForWin();
       const isDraw = checkForDraw();
       if (isWin) {
-        console.log(`game over! player ${isWin} won`);
-        isGameRunning = false;
+        endGame(`Congrats! Player ${isWin} won!`);
       } else if (isDraw) {
-        console.log("draw!");
-        isGameRunning = false;
+        endGame(`It's a draw!`);
       } else {
         //switch players
         curPlayer = 1 - curPlayer;
@@ -109,7 +116,11 @@ const handleSqClick = (event) => {
     }
   }
 };
-
+const endGame = (message) => {
+  document.querySelector("#message").textContent = message;
+  isGameRunning = false;
+  document.querySelector(".ttt-grid").classList.remove("hover-active");
+};
 /**
  * Check if a square is empty (legal to click)
  * @param index - the index of the square that we want to check

@@ -136,7 +136,7 @@ header {
   font-size: 1.25rem;
   padding: 0.5rem;
   border-radius: 0.25rem;
-background-color: white;
+  background-color: white;
   border: 1px solid black;
 }
 .use-color-x {
@@ -173,8 +173,8 @@ background-color: white;
   outline: 3px solid transparent;
 }
 
-.ttt-square:not(.square-o, .square-x):hover,
-.ttt-square:not(.square-o, .square-x):focus {
+.hover-active .ttt-square:not(.square-o, .square-x):hover,
+.hover-active .ttt-square:not(.square-o, .square-x):focus {
   transform: scale(1.03);
   transition: transform 0.3s, outline 0.3s;
   outline: 3px solid var(--color-current-secondary);
@@ -185,16 +185,22 @@ background-color: white;
   opacity: 0;
   color: var(--color-current-secondary);
 }
-.ttt-square:not(.square-o, .square-x):hover::after,
-.ttt-square:not(.square-o, .square-x):focus::after {
+.hover-active .ttt-square:not(.square-o, .square-x):hover::after,
+.hover-active .ttt-square:not(.square-o, .square-x):focus::after {
   opacity: 1;
   transition: opacity 0.3s;
 }
-
-* {
-  /* border: 0.5px solid red; */
+.message-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
+.winning-line {
+  border: 3px solid black;
+}
 .square-x {
   color: var(--color-x-main);
   background-color: var(--color-x-secondary);
