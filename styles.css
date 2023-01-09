@@ -94,12 +94,12 @@ video {
 }
 
 :root {
-  --color-x-main: darkred;
-  --color-o-main: darkblue;
+  --color-x-main: #4a0688;
+  --color-o-main: #0f623b;
 
-  --color-x-secondary: lightpink;
-  --color-o-secondary: lightblue;
-  --color-bg: #f3f4f6;
+  --color-x-secondary: #bab8d6;
+  --color-o-secondary: #a4d98f;
+  --color-bg: #f5f5f5;
   --box-shadow-standard: 0px 15px 15px -3px rgba(0, 0, 0, 0.1);
 }
 body {
@@ -141,7 +141,7 @@ header {
   transition: transform 0.3s;
 }
 #btn-restart:hover {
-  transform: scale(1.03);
+  transform: scale(1.05);
   transition: transform 0.3s;
 }
 
@@ -204,9 +204,15 @@ header {
   gap: 0.5rem;
 }
 
-.winning-line {
-  border: 3px solid black;
+.winning-line:is(.square-x) {
+  background-color: var(--color-x-main);
+  color: white;
 }
+.winning-line:is(.square-o) {
+  background-color: var(--color-o-main);
+  color: white;
+}
+
 .square-x {
   color: var(--color-x-main);
   background-color: var(--color-x-secondary);
