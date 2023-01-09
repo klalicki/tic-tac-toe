@@ -6,6 +6,7 @@
 :root {
   --color-x-main: darkred;
   --color-o-main: darkblue;
+  --color-current: var(--color-x-main);
   --color-x-secondary: lightpink;
   --color-o-secondary: lightblue;
   --color-bg: #f3f4f6;
@@ -24,6 +25,14 @@ body {
 }
 .ttt-panel {
   width: 300px;
+}
+.use-color-x {
+  --color-current-main: var(--color-x-main);
+  --color-current-secondary: var(var(--color-x-secondary));
+}
+.use-color-o {
+  --color-current-main: var(--color-o-main);
+  --color-current-secondary: var(var(--color-o-secondary));
 }
 .ttt-grid {
   align-self: stretch;
@@ -49,10 +58,12 @@ body {
   transition: transform 0.3s;
   box-shadow: 1em black;
 }
-.ttt-square:hover,
-.ttt-square:focus {
+
+.ttt-square:not(.square-o, .square-x):hover,
+.ttt-square:not(.square-o, .square-x):focus {
   transform: scale(1.05);
   transition: transform 0.3s;
+  background-color: var(--color-current-secondary);
 }
 
 * {
@@ -72,4 +83,22 @@ body {
 .square-o {
   color: var(--color-o-main);
   background-color: var(--color-o-secondary);
+}
+
+.modal-box {
+  display: block;
+  position: fixed;
+  background-color: white;
+  padding: 3rem;
+  z-index: 15;
+}
+.modal-box::after {
+  content: "";
+  background-color: rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
 }

@@ -21,6 +21,7 @@ const clearGameBoard = () => {
   document.querySelectorAll(".ttt-square").forEach((item) => {
     item.textContent = "";
     item.classList.remove("square-x", "square-o");
+    item.disabled = false;
   });
 };
 const updateUI = () => {
@@ -84,6 +85,7 @@ const handleSqClick = (event) => {
       );
       curSquareElem.blur();
       curSquareElem.textContent = gameRules.players[curPlayer];
+      curSquareElem.disabled = true;
       curSquareElem.classList.add(curPlayer === 0 ? "square-x" : "square-o");
       const isWin = checkForWin();
       const isDraw = checkForDraw();
