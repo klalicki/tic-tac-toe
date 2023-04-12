@@ -2,7 +2,7 @@
 
 This is my final project for AlbanyCanCode's JavaScript Fundamentals class.
 The goal of this project was to create a functional Tic-Tac-Toe web app, using vanilla JavaScript.
-This project currently lives at https://staging.kristofflalicki.dev/projects/tic-tac-toe/, or can be played by [downloading this repo as a zip file](https://github.com/klalicki/tic-tac-toe/archive/refs/heads/main.zip), extracting it, and opening index.html.
+This project currently lives at https://www.kristoff.dev/tic-tac-toe/, or can be played by [downloading this repo as a zip file](https://github.com/klalicki/tic-tac-toe/archive/refs/heads/main.zip), extracting it, and opening index.html.
 
 ## Features
 
